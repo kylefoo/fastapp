@@ -1,4 +1,5 @@
 {
+    "parser": "babel-eslint",
     "env": {
         "browser": true,
         "es6": true
@@ -15,6 +16,9 @@
         "react"
     ],
     "rules": {
+        "no-console": 0,
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
         "linebreak-style": [
             "error",
             "unix"

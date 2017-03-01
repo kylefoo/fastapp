@@ -2,11 +2,17 @@
 
 //Import a library to help create a component
 import React from 'react';
-import { Text, AppRegistry } from 'react-native';
+import { AppRegistry, View } from 'react-native';
+import Header from './src/components/Header';
+import ProductsList from './src/components/ProductsList';
+
 
 //Create a component
 const App = () => (
-    <Text> Some Text</Text>
+    <View style={{ flex: 1 }}>
+      <Header headerText={'Explore'} />
+      <ProductsList />
+    </View>
 );
 
 //Render it to the device
