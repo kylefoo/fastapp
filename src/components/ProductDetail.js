@@ -34,7 +34,7 @@ const ProductDetail = ({ product }) => {
       </CardSection>
 
       <CardSection>
-        <Button text={'Click Me!'} url={url} onPress={onButtonPress()} />
+        <Button url={url} onPress={ () => Linking.openURL(url)} >Click Me</Button>
       </CardSection>
     </Card>
   );
