@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, Image, Linking } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
 
-const ProductDetail = ({ product }) => {
-  const { title, artist, thumbnail_image, image, url } = product;
-  const { thumbnailContainerStyle, thumbnailStyle, headerContentStyle, headerTextStyle, imageStyle} = styles;
-  const onButtonPress = (url) => {
+class ProductDetail extends Component {
+  onButtonPress() {
+    const { url } = this.props.product.url;
+
     Linking.canOpenURL(url).then(supported => {
      if (!supported) {
         console.log('Can\'t handle url: ' + url);
@@ -15,30 +15,35 @@ const ProductDetail = ({ product }) => {
         return Linking.openURL(url);
       }
 	}).catch(err => console.error('An error occurred', err));
-  };
+  }
+  
+  render () {
+    const { title, artist, thumbnail_image, image, url } = this.props.product;
+    const { thumbnailContainerStyle, thumbnailStyle, headerContentStyle, headerTextStyle, imageStyle} = styles;
 
-  return (
-    <Card>
-      <CardSection>
-        <View style={thumbnailContainerStyle}>
-          <Image source={{ uri: thumbnail_image}} style={thumbnailStyle}></Image>
-        </View>
-        <View style={headerContentStyle}>
-          <Text style={headerTextStyle}>{title}</Text>
-          <Text>{artist}</Text>
-        </View>
-      </CardSection>
+    return (
+      <Card>
+        <CardSection>
+          <View style={thumbnailContainerStyle}>
+            <Image source={{ uri: thumbnail_image}} style={thumbnailStyle}></Image>
+          </View>
+          <View style={headerContentStyle}>
+            <Text style={headerTextStyle}>{title}</Text>
+            <Text>{artist}</Text>
+          </View>
+        </CardSection>
 
-      <CardSection>
-        <Image source={{ uri: image}} style={imageStyle}></Image>
-      </CardSection>
+        <CardSection>
+          <Image source={{ uri: image}} style={imageStyle}></Image>
+        </CardSection>
 
-      <CardSection>
-        <Button url={url} onPress={ () => Linking.openURL(url)} >Click Me</Button>
-      </CardSection>
-    </Card>
-  );
-};
+        <CardSection>
+          <Button url={url} onPress={ this.onButtonPress.bind(this) } >Click Me</Button>
+        </CardSection>
+      </Card>
+    );
+  }
+}
 
 const styles = {
     headerContentStyle: {
